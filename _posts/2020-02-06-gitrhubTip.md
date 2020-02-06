@@ -7,15 +7,15 @@ author_profile: true
 # 처음만난 github 에러(error)
 나는 데이터사이언스를 공부를 시작하고 나도 다른사람들처럼 개발블로그를 만들고 싶었다.
 
- 그러다가 우연히 유튜브에 [안수빈(고려대)](https://subinium.github.io/)님이 T-academy에서 강의하신 동영상을 봤다. 내가 가장 하고 싶었던 블로그를 어떻게 시작해야 하는지 잘 설명해주셨다.
+ 그러다가 우연히 유튜브에 [안수빈(고려대)](https://subinium.github.io/)님이[T-academy]("https://www.youtube.com/watch?v=eCv_bh-Ax-Q&t=2831s")에서 강의하신 동영상을 봤다. 내가 가장 하고 싶었던 블로그를 어떻게 시작해야 하는지 잘 설명해주셨다.
 
- #### 공부를 하다가 만난 나의 첫 깃허브 에러
+#### 에러내용
 
-     error: failed to push some refs to ~~~~~~
-    hint: Updates were rejected because the tip of your current branch is behind
-    hint: its remote counterpart. Integrate the remote changes (e.g.
-    hint: 'git pull ...') before pushing again.
-    hint: See the 'Note about fast-forwards' in 'git push --help' for details      
+>  error: failed to push some refs to ~~~~~~
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details      
 
 git push를 하다 만난 에러였다.
 
@@ -25,21 +25,21 @@ git push를 하다 만난 에러였다.
 
 
 ## 첫번째 구글에서 찾은 방법은
-git remote add origin repository
-git pull 
-git pull origin master
-git push origin master
+1. git remote add origin repository
+2. git pull 
+3. git pull origin master
+4. git push origin master
 
 
 
 ## 두번째 방법은
-git init
-git add .
-git commit -m "아무이름"
-git remote add origin 자기자신 깃헙주소/repository
-연결이 잘됬는지 확인을 위해
-git remote -v
-git push --force --set-upstream origin master
+1. git init
+2. git add .
+3. git commit -m "아무이름"
+4. git remote add origin 자기자신 깃헙주소/repository
+5. 연결이 잘됬는지 확인을 위해
+5. git remote -v
+7. git push --force --set-upstream origin master
 
 
 
