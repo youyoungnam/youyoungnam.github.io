@@ -9,13 +9,13 @@ author_profile: true
 
  그러다가 우연히 유튜브에 [안수빈(고려대)](https://subinium.github.io/)님이 T-academy에서 강의하신 동영상을 봤다. 내가 가장 하고 싶었던 블로그를 어떻게 시작해야 하는지 잘 설명해주셨다.
 
-               공부를 하다가 만난 나의 첫 깃허브 에러
+ #### 공부를 하다가 만난 나의 첫 깃허브 에러
 
- >error: failed to push some refs to ~~~~~~
-hint: Updates were rejected because the tip of your current branch is behind
-hint: its remote counterpart. Integrate the remote changes (e.g.
-hint: 'git pull ...') before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details
+     error: failed to push some refs to ~~~~~~
+    hint: Updates were rejected because the tip of your current branch is behind
+    hint: its remote counterpart. Integrate the remote changes (e.g.
+    hint: 'git pull ...') before pushing again.
+    hint: See the 'Note about fast-forwards' in 'git push --help' for details      
 
 git push를 하다 만난 에러였다.
 
@@ -24,7 +24,7 @@ git push를 하다 만난 에러였다.
 나도 이제 깃허브 블로그를 만들었으니 다음번에는 까먹지 않게 여기다 기록을하자.
 
 
->첫번째 구글에서 찾은 방법은
+## 첫번째 구글에서 찾은 방법은
 git remote add origin repository
 git pull 
 git pull origin master
@@ -32,7 +32,7 @@ git push origin master
 
 
 
->두번째 방법은
+## 두번째 방법은
 git init
 git add .
 git commit -m "아무이름"
@@ -44,3 +44,4 @@ git push --force --set-upstream origin master
 
 
 두번째 방법으로 시도해보니 해결이 되었다.
+
