@@ -1,6 +1,6 @@
 ---
 title: "Git공부관련"
-permalink: /categories/카테고리/Git공부관련/
+permalink: /categories/Git/
 layout: category
 author_profile: true
 taxonomy: Git

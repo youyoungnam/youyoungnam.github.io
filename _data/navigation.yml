@@ -2,6 +2,8 @@
 main:
   - title: "About me"
     url: /about/
+  - title: Git
+    url : /categories/Git
   - title: "카테고리"
     url : /categories/
         # - title: "About"
