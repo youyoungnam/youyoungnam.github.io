@@ -1,10 +1,6 @@
 ---
 title : Github블로그 에러(error)에 당황
-permalink: /categories/Git/
 author_profile: true
-layout: category
-author_profile: true
-taxonomy: Git
 ---
 # 처음만난 github 에러(error)
 나는 데이터사이언스를 공부를 시작하고 나도 다른사람들처럼 개발블로그를 만들고 싶었다.
