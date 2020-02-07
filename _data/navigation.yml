@@ -2,6 +2,8 @@
 main:
   - title: "About me"
     url: /about/
+  - title: "카테고리"
+    url : 
         # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
   # - title: "Sample Posts"
