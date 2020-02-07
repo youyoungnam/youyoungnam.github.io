@@ -33,3 +33,6 @@ author_profile: true
 
 1. git add school.txt
 2. git commit school.txt -m "first commit"
+3. git push origin master
+
+위 단계가 Git 저장소에 파일을 올리는 방법?? 이다.
