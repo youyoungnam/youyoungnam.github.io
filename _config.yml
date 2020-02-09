@@ -108,7 +108,7 @@ analytics:
 # Site Author
 author:
   name             : "Yoo young nam"
-  avatar           :  # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : /assets/images/kakao.png # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "There is no substitute for hard work-Edson"
   location         : "South Korea"
   #email            : "dbdudska113@naver.com"
