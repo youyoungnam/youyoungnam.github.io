@@ -61,3 +61,4 @@ print(vector.vocabulary_)
 > [ [1 1 2 1 2 1] ] # 단어의 빈도 수를 기록
 {'you': 4, 'know': 1, 'want': 3, 'your': 5, 'love': 2, 'because': 0} # 단어가 어떻게 부여 되었는지 결과
 
+**위에 내용은 [딥러닝을 이용한 자연어처리 입문](https://wikidocs.net/book/2155) 여기서 공부한 내용을 쓴것이다.**
