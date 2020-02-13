@@ -43,9 +43,13 @@ print(bow)
 
 **다시말하자면 BoW는 단어의 빈도수를 기록하는것이다.**
 
+---
+
 ## 다른 방식으로 BoW만들기
 
+
 **CounterVectorizer 클래스로 BoW 만들기**
+-
 
 ```python
 from sklearn.feature_extraction.text import CountVectorizer
