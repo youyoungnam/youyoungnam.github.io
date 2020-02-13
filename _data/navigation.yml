@@ -2,10 +2,13 @@
 main:
   - title: "About"
     url: /about/
+  - title: "프로젝트"
+    url : "/categories/프로젝트"
   - title: Git
     url : /categories/Git
   - title: "카테고리"
     url : /categories/
+
         # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
   # - title: "Sample Posts"
