@@ -1,0 +1,146 @@
+---
+title: deeplearning_image_입문하기
+categories: deeplearning_image
+author_profile: true
+---
+
+**최근에 캐글에서 이미지 classification을 공부하기 시작했다.
+캐글 image_classification에는 경로로 되어있는 경우가 있고, csv파일처럼 되어있는 경우가 있다.**
+
+
+**그래서 처리하는 방법이 달라서 여기에 처리하는 방법을 적을 생각이다.**
+
+
+####1.CSV파일로 되어있을때 처리방법.
+
+**캐글대회는 digit-recognizer 대회에 참여했다.**
+
+파일을 불러오자.
+```python
+import pandas as pd
+train = pd.read_csv("/kaggle/input/digit-recognizer/train.csv")
+test = pd.read_csv("/kaggle/input/digit-recognizer/test.csv")
+
+
+# train, test파일을 한번에 보고싶을때 쓰면 유용하다.
+display(train, test)
+```
+
+**train.shape을 보면 42000row x 784 columns다. 이것의 의미는 이미지 하나당 0의 columns부터 784개의 데이터로 들어가있다. 784는 28의제곱이다 28*28=784 사진의 사이즈가 28*28인거다.**
+
+**이것을 데이터셋에 저장하기위해 아이디 하나당 펼쳐 놓은것이다.
+그래서 우리모델을 학습시키기 위해 size를 다시한번 재구성 해서 하나의 이미지가 28*28로 만든 다음에 그 사진을 이제 우리 모델에 넣어줘서 학습을 시킬것이다.**
+
+다음에 해야 할 일은 정답 column을 지워주자.
+
+```python
+train.columns
+>>  Index(['label', 'pixel0', 'pixel1', 'pixel2', 'pixel3', 'pixel4', 'pixel5',
+       'pixel6', 'pixel7', 'pixel8',
+       ...
+       'pixel774', 'pixel775', 'pixel776', 'pixel777', 'pixel778', 'pixel779',
+       'pixel780', 'pixel781', 'pixel782', 'pixel783'],
+      dtype='object', length=785)
+
+# columns 기준으로 지워야 하기때문에 axis=1이다.
+train2 = train.drop(["label"], axis=1)
+train2.shape
+>>42000,784
+```
+**여전히 데이터 하나하나가 42000*784형태로 되어있다. 이렇게 되어있으면 안된다. 28x28형태로 되어 있어야한다. 그래야지 이걸로 학습을 할 수 있다.**
+
+#### 바꿔주는법
+#### reshape 함수이용
+   - reshape을 활용해서 차원을 784을 28*28로 바꿔줄거다.(사진으로)
+   - reshape는 언제한다? array형태로 바꿔진 다음에 해야한다.
+   - reshape(데이터가 들어갈자리(데이터갯수) , 이미지사이즈,이미지사이즈,RGB) 1은 흑백 
+   - reshape(-1, 28,28,1)
+
+
+```python
+# np.array()이렇게 하면 array형태로 바뀌지만 다른방법도 있음
+# train2.values.reshpae(~~~)
+train2 = np.array(train2).reshape(-1,28,28,1)
+test2 = np.array(test).reshape(-1,28,28,1)
+train2.shape
+>> (42000, 28,28,1)
+```
+**우리 모델은 딥러닝 모델이다 보니까 딥러닝 모델은 기본적으로
+그 숫자들의 패턴을 가지고 학습(거리기반 학습) 그래서 전처리가 필요함 표준화가 필요함 0~1사이 값으로 바꿔준다든지 -1~1사이로 바꿔준다든지 평균을 0으로 분산을1로 왜냐면은 각각의 데이터들이 8bit로  0~255까지 들어있음 그래서 이것을 표준화를 해줘야함**
+
+```python
+train2 = train2/255.0
+test2 = test2/255.0
+```
+**경로가 아닌 데이터셋을 이미지 보는방법**
+```python
+import matplotlib.pyplot as plt
+plt.figure(figsize=(20,12))
+plt.imshow(train2[1].reshape(28,28))
+```
+
+
+#### 모델을 만들어보자.
+
+```python
+# 이 Sequential은 뭐하는 코드냐면 딥러닝 모델을 쌓을 때
+# 처음에 모델을 선언을 시작하겠다~~ 말을 해주는 라이브러리
+# 딥러닝은 모델 선언과정이 조금길다.
+
+from keras import Sequential
+from keras.layers import *
+
+# 선언
+model = Sequential()
+# add라는 함수를 사용해서 계속 쌓아 나간다. 
+# Conv2D 설명이 필요함.
+
+## Conv2D(옵션1, 옵션2, 옵션3, 옵션4)
+# 옵션1 부분은 몇가지의 특징을 추출할래 라는 옵션 몇개의 뉴런을 만들래 라는의미
+# 32을 넣어보자 즉, 우리 class 총 10가지의 class을 학습을 시킬 때
+# 32종류의 그러한 특징들을 추출을 해서 알아서 0~9까지 구분을 하겠다는 의미 
+
+# 옵션2 kenel_size (3,3)는 이미지 학습할때 이미지들을 둘러볼때
+#3,3짜리 돋보기?? 같은 느낌 우리 이미지를 돌면서 행렬을 하면서 계산함 사칙연산 같은거 필터
+# 옵션3 activation의 relu는 우리 convolution layer에 들어오기전의 정보가 이 convolution layer을 거치면서 어떤 새로운정보로 변형이 된다. 이때 딥러닝이기 위해서는 반드시 어떤 비선형적인 느낌을 갖는
+# 새로운 정보로 탈 바꿈을 해야한다. 뭔가 정보가 학습이 되서 뭔가 화학물질이 첨가되는거 처럼 값이 바껴서 새로운 정보로 바꿔어야지만 
+# 딥러닝 모델이 학습을 할 수 있다. 
+model.add(Conv2D(32,(3,3) ,activation="relu", input_shape=(28,28,1)))
+# Flatten()층은 입력층이 있으니까 결국에는 딥러닝이 잘 구조가 이루어지기 위해서 최소한 출력층은 있어야한다. 그러니까 
+# 입력층으로 시작해서 최소한 출력층은 있어야한다.
+# 근데 왜 출력층이 나오기전에 Flatten이 나왔냐면
+# 입력층과 출력층의 차원이 뭔가 잘 맞아야하는데 이게 안맞으면은 
+# network구조가 연결이 안되서 오류가 난다. 미리미리 오류가 나기전에 방지 하기위해서 flatten층을 넣어주었다.
+# convolution layer는 3차원인데 우리가 앞으로 곧 쌓을려고 하는 출력층은 1차원이기 때문에 이거를 구조를 잘 연결을 시켜줘야 한다.
+# 3차원을 1차원으로 바꿔주는거라고 생각 하면된다.
+model.add(Flatten())
+
+# Dense(옵션1, 옵션2)
+# 옵션1 class의 갯수가 들어감 근데 여기서는 출력층이기때문에 위에서 나온 정보가 Dense layer에 들어오기전 그 input들이 결국에는 dense layer에 거쳐서 나가고 밖으로 나갈때는 결국 각각 class별 예측을 해야되니까 y값 즉 확률값으로 나가야한다. 
+# 강아지일 확률 고양이일 확률로 나가야된다.
+# 정답 class 즉 종류가 들어가야한다.
+# 옵션2 activation 
+# 맨마지막에 들어가는 층 자체는 반드시 softmax 로 해줘야한다 왜?
+# 앞에서 어떤 정보가 들어오든 정보가 데이터가 1024든 500이든 800이든 앞에서 뭐가들어오든지 나갈때는 0~1 사이 확률값으로 나가야한다. 강아지일 확률 고양이일 확률 0~1사이로 바꿔주는 softmax로
+model.add(Dense(10, activation="softmax"))
+model.compile(metrics=["acc"], loss="sparse_categorical_crossentropy", optimizer="adam")
+model.fit(train2, train["label"], epochs=10)
+
+
+
+result = model.predict(test2)
+# argmax()즉 가장 높은 확률값을 갖는 label을 가져오겠다는뜻
+# 
+result. result.argmax(1)
+```
+
+***Conv2D을 넣어준 이유는 우리가 지금 이미지를 학습을 하기때문에 이러한 이미지의 정보들을 잘 추출을 하는 그 층을 바로 CNN 그래서 convolution neural layer을 사용한다.**
+
+**Conv2D가 어떻게 학습을 하는지 최소한 알아야한다. 머신러닝에서는 데이터분석가가 y값을 학습을 시키기 위해서 알아서 사용자가 데이터를 수집했다 예를들어서 이 사진같은 경우는 어떤 사진이다 정보를 추가해줬다. 그런데 딥러닝 같은경우는 만들어 주지 않는다. 우리 모델이 이 convolution layer가 알아서 판단해서 가장 중요할거 같은 그러한 feature(column)을 추출하는 방식으로 학습을 한다.**
+
+
+**만약에 고양이 강아지가 있다고 하자 그러면은 모델이 정답값을 보고 사진들은 본다 우리 convolution layer들이 그러면은 그러한 사진들의 공통적인 특징들이 있다. 강아지들한테 나오는 공통적인 특징이라든지 고양이들한테 나오는 공통적인 특징이라던지 여기서 가장 뭔가 세분화가 되는 정답값을 잘 구분하는 것을 추출을 한다.**
+
+**모델이 알아서 전처리를 하지 않아도 알아서 추출을 한다. 그리고 우리가 어떤 옵션을 넣어야지 얼마나 더 추출을 잘할것인가 우리가 판을 잘 깔아줘야한다. ex) 이정도의 데이터복잡도면 이정도만 추출하느게 더 이득이겠다 왜냐면은 또 많이 추출해버리면 그리고 칼럼이 많아지면 과적합이 발생할 가능성이 있다. 너무 많이 학습을 해서 과적합이 발생하지 않도록 hyper parameter을 가지고 잘 옵션을 설정해야 한다.**
+
+
