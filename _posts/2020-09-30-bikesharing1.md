@@ -264,4 +264,4 @@ result = np.exp(result)
    - columns의 수
    - 컬럼의수가 50~100개면 복잡도가 높다.
 
-<img src="C:/Users/dbdud/Desktop/ones.png"
+<img src="ones.png">
