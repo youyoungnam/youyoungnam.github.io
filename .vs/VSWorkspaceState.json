@@ -1,9 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\assets\\images",
-    "\\_posts"
+    "\\assets",
+    "\\assets\\images"
   ],
-  "SelectedNode": "\\_posts\\2020-11-10-Batch_size.md",
+  "SelectedNode": "\\assets\\images",
   "PreviewInSolutionExplorer": false
 }
