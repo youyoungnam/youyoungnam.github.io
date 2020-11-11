@@ -21,8 +21,7 @@ author_profile: true
   - sha256sum 다운받은 리눅스버전 아나콘다파일 
   - https://docs.anaconda.com/anaconda/install/hashes/all/ <-- 아나콘다 Hash파일 확인 
 
-<img src="/aseets/images/hash1.PNG">
-
+<img src="/assets/images/hash1.PNG">
 **Hash가 다운로드한 파일이랑 같다면 이제 설치를하자**
 
 ```python
