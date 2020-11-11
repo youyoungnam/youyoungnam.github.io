@@ -1,6 +1,6 @@
 ---
 title: Ubuntu에 Anaconda 설치하기 
-categories: Linux_Ubuntu
+categories: Linux/Ubuntu
 author_profile: true
 ---
 
@@ -29,7 +29,7 @@ author_profile: true
 bash Anaconda3-2020.07-Linux-x86_64.sh 
 ```
 
-<img src="/assets/images/hash2.PNG">
+<img src="/assets/images/bash2.PNG">
 
 **위 사진처럼 코드를 입력하고 Enter을 눌러주면 설치가 될것이다. 중간에 Yes or no가 나오는데 Yes를 해주면 된다.**
 
