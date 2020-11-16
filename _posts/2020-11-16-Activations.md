@@ -17,12 +17,13 @@ Gradient Vanishing은 Hidden_layer가 깊어질수록 심해지기 때문에 Hid
 ## ReLU함수 
 
 **ReLU(Rectified Linear unit)함수는 기존의 시그모이드 함수와 같은 비선형 활성 함수가 지니고 있는 문제점을 어느 정도 해결한 활성 함수이다. 활성 함수 ReLU는 F(x) = max(0, x)와 같이
-정의된다. 
+정의된다.**
 
 
-<img src = "https://miro.medium.com/max/875/0*g9ypL5M3k-f7EW85.png">
+<img src = "https://pytorch.org/docs/stable/_images/ReLU.png">
 
-**image 출처 https://medium.com/@sonish.sivarajkumar/relu-most-popular-activation-function-for-deep-neural-networks-10160af37dda**
+**image 출처**
+https://pytorch.org/docs/stable/generated/torch.nn.ReLU.html
 
 
 **입력 값이 0 이상이면 이 값을 그대로 출력하고 0 이하이면 0으로 출력하는 함수이다. 이 활성 함수를 미분할 때 입력 값이 0이상인 부분은 기울기가 1 입력값이 0이하인 부분은
