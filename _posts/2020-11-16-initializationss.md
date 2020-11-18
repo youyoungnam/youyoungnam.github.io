@@ -24,7 +24,7 @@ criterion = nn.CrossEntropyLoss()
 ```
 ## (1)설명
 
-** Weight, Bias 등 딥러닝 모델에서 초깃값으로 설졍되는 요소에 대한 모듈인 init를 임포트한다. MLP 모델 내의 weight를  초기화할 부분을 설정하기위해 weight_init 함수를 정의한다.
+**Weight, Bias 등 딥러닝 모델에서 초깃값으로 설졍되는 요소에 대한 모듈인 init를 임포트한다. MLP 모델 내의 weight를  초기화할 부분을 설정하기위해 weight_init 함수를 정의한다.
 MLP 모델을 구성하고 있는 파라미터 중 nn.Linear에 해당하는 파라미터 값에 대해서만 지정한다. nn.Linear에 해당하는 파라미터 값에 대해 he_initialization을 이용해 파라미터 값을 초기화 한다.**
 
 
